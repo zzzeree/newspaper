@@ -1,20 +1,19 @@
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
+public class Main {
 
-public class Main{
-    public static void main (String[] args) throws Exception{
+    public static void main(String[] args) throws Exception {
 
-        Document mainpage = Jsoup.connect("https://tengrinews.kz/").get();
+        Link link = new Link();
 
-        Element link = mainpage.select("div.main-news_super_item a").first();
-        String url = link.absUrl("href");
-        Document doc = Jsoup.connect(url).get();
-        System.out.println(doc.select("h1").text());
+        String url = "https://tengrinews.kz/";
 
-        Element link2 = doc.select("a[href*=author]").first();
-        String url2 = link2.absUrl("href");
-        Document author = Jsoup.connect(url2).get();
-        System.out.println(author.select("h1").text());
+        String title = link.getTitle(url);
+        System.out.println(title);
+
+        String authorName = link.getAuthor(url);
+        System.out.println(authorName);
+
+        String date = link.getDate(url);
+        System.out.println(date);
+
     }
 }
